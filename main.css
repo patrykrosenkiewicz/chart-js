@@ -1,0 +1,17 @@
+body {  
+  background: #1D1F20;
+  padding: 16px;
+  margin:0;
+}
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 30vh;
+  width: 80vw;
+}
+
+canvas {
+  border: 1px dotted red;
+}
+
+
