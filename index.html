@@ -15,10 +15,19 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
 </head>
 <body>
+	<div class="options">
+		<h1>this is a chart app for currencys</h1>
+		<form id="currencyForm">
+		  <input type="radio" name="currency" value="eur" checked> eur
+		  <input type="radio" name="currency" value="sek"> sek
+		  <input type="radio" name="currency" value="nok"> nok
+		  <input type="radio" name="currency" value="gbp"> gbp
+		</form>
+	</div>
 	<div class="chart-container">
 		<canvas id="line-chart" width="800" height="450"></canvas
 	</div>
-<script src="canvas.js">
+<script src="chart.js">
 
 </script>
 

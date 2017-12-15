@@ -13,5 +13,23 @@ body {
 canvas {
   border: 1px dotted red;
 }
+h1{
+	display: inline-block;
+}
+
+ul{
+	float:right;
+	margin-right: 50px;
+	font-size: 20px
+	list-style-type:none;
+}
+
+li{
+	float: left;
+	color: white;
+	padding-left: 10px;
+	list-style-type:none;
+
+}
 
 
