@@ -1,17 +1,13 @@
 var chart = {
 	values: [],
+	currency: 'eur',
 
 	init: function(){
 		
 		this.cacheDom();
-		this.setCurrencyValue();
 		this.bindEvents();
-		
-	},
-
-	setCurrencyValue: function(currency='eur'){
-		this.currency = currency;
 		this.makeCall();
+		
 	},
 
 	cacheDom: function(){
@@ -66,7 +62,8 @@ var chart = {
 	},
 
 	getCurrencyValue: function(){
-		this.setCurrencyValue($('input[name=currency]:checked', '#currencyForm').val());
+		this.currency = $('input[name=currency]:checked', '#currencyForm').val();
+		this.makeCall();
 	}
 
 
