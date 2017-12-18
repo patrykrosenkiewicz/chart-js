@@ -1,6 +1,7 @@
 var chart = {
+	values: [],
 
-	init: function init(){
+	init: function(){
 		
 		this.cacheDom();
 		this.setCurrencyValue();
@@ -8,34 +9,33 @@ var chart = {
 		
 	},
 
-	setCurrencyValue: function setCurrencyValue(currency='eur'){
+	setCurrencyValue: function(currency='eur'){
 		this.currency = currency;
 		this.makeCall();
 	},
 
-	cacheDom: function cacheDom(){
+	cacheDom: function(){
 		this.lineChart = $("#line-chart")[0];
 
-		//options for currencys
+		//options for currencies
 		this.radioInput = $('form input:radio');
 	},
 
-	makeCall: function makeCall(){
+	makeCall: function(){
 		var self = this;
-		var values = [];
 		$.when(this.ajaxCall(this.currency)).then(function(data){
-			values['mid'] = (self.createArray(data, 'rates', 'mid'));
-			values['date'] = self.createArray(data, 'rates', 'effectiveDate');
-			values['code'] = data['code'];
-			self.drawChart(values);
+			self.values['mid'] = (self.createArray(data, 'rates', 'mid'));
+			self.values['date'] = self.createArray(data, 'rates', 'effectiveDate');
+			self.values['code'] = data['code'];
+			self.drawChart(self.values);
 		})
 	},
 
-	ajaxCall: function ajaxCall(currency){
-		return $.get('http://api.nbp.pl/api/exchangerates/rates/a/'+currency+'/last/10/?format=json');
+	ajaxCall: function(currency){
+		return $.get('http://api.nbp.pl/api/exchangerates/rates/a/'+currency+'/2017-11-01/2017-12-01/?format=json');
 	},
 
-	createArray: function createArray(msg, objectKey, property){
+	createArray: function(msg, objectKey, property){
 		var value = []
 			for (var i = 0; i < msg[objectKey].length; i++) {
 				value.push(msg[objectKey][i][property]);
@@ -44,7 +44,7 @@ var chart = {
 		return value;
 	},
 
-	drawChart: function drawChart(data){
+	drawChart: function(data){
 		console.log(data['mid']);
 		new Chart(this.lineChart, {
 		  type: 'line',
@@ -61,11 +61,11 @@ var chart = {
 		});
 	},
 
-	bindEvents: function bindEvents(){
+	bindEvents: function(){
 		this.radioInput.change(this.getCurrencyValue.bind(this));
 	},
 
-	getCurrencyValue: function getCurrencyValue(){
+	getCurrencyValue: function(){
 		this.setCurrencyValue($('input[name=currency]:checked', '#currencyForm').val());
 	}
 
